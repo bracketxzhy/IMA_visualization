@@ -1,4 +1,4 @@
-```markdown
+
 # DICOM (.IMA) 单张图像快速查看工具
 
 ## 功能描述
@@ -13,7 +13,7 @@
     ├── ANON_0002.IMA
     └── ...（共 226 张）
 ```
-- 文件必须位于 `data` 文件夹内  
+- 文件必须位于 `data   数据` 文件夹内  
 - 文件命名必须为 `ANON_XXXX.IMA`（XXXX 为 4 位数字）  
 - `.IMA` 文件本身就是标准 DICOM 文件，仅扩展名不同
 
@@ -27,29 +27,29 @@ file_path = Path('data/ANON_0026.IMA')   # ← 修改这里即可
 
 ### 方式一：使用 conda（最稳定，推荐）
 ```bash   ”“bash
-conda create -n dicom python=3.11 -y
-conda activate dicom
+conda create -n dicom python=3.11 -yConda create -n dicom python=3.11Conda create -n dicom python=3.11
+conda activate dicom   Conda激活dicom   Conda激活dicom
 conda install -c conda-forge pydicom matplotlib -y
 ```
 
 ### 方式二：使用 pip（确保安装正版 pydicom）
 ```bash   ”“bash
 pip uninstall pydicom pydicom-seg -y
-pip install --index-url https://pypi.python.org/simple pydicom matplotlib
+pip install --index-url https://pypi.python.org/simple pydicom matplotlibPIP安装——index-url https://pypi.python.org/simple pydicom matplotlib
 ```
 
 ## 脚本内容（保存为 view_dicom.py）
-```python
-import pydicom
-from pathlib import Path
-import matplotlib.pyplot as plt
+```python   ”“python
+import pydicom   进口pydicom
+from pathlib import Path   从pathlib导入路径
+import matplotlib.pyplot as plt进口matplotlib。Pyplot为PLT
 
-file_path = Path('data/ANON_0001.IMA')             
+file_path = Path('data/ANON_0001.IMA')             file_path = Path（'data/ANON_0001. 0001. '）IMA”)
 
-ds = pydicom.dcmread(file_path)                 
+ds = pydicom.dcmread(file_path)                 Ds = pydicom.dcmread（file_path）
 
-plt.imshow(ds.pixel_array, cmap='gray')         
-plt.axis('off')                                 
+plt.imshow(ds.pixel_array, cmap='gray')         plt.imshow (ds。pixel_array提出=“灰色”)
+plt.axis('off')                                    plt.axis(“了”)
 plt.title(file_path.name)
 plt.show()
 ```
