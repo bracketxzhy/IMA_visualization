@@ -1,52 +1,53 @@
 
-# DICOM (.IMA) 单张图像快速查看工具
+# DICOM (.IMA) Single Image Quick Viewer
 
-## 功能描述
-快速显示单个 `.IMA   。誓章` 格式的 DICOM 医学图像（常用于 GE、Siemens 等设备导出的序列）。
+## Description
+Simple tool to quickly preview a single DICOM image with `.IMA` extension (commonly used by GE, Siemens, Philips scanners).
 
-## 数据存放要求
-请确保项目目录结构如下：
+## Data Requirements
+Your project folder must be structured as follows:
 ```
-当前项目目录/
+project_folder/
 └── data/
     ├── ANON_0001.IMA
     ├── ANON_0002.IMA
-    └── ...（共 226 张）
-```
-- 文件必须位于 `data   数据` 文件夹内  
-- 文件命名必须为 `ANON_XXXX.IMA   ANON_XXXX。IMA`（XXXX 为 4 位数字）  
-- `.IMA   。誓章` 文件本身就是标准 DICOM 文件，仅扩展名不同
-
-**默认显示文件**：`data/ANON_0001.IMA   数据/ ANON_0001。IMA`  
-若需查看其他编号，只需修改脚本第 5 行：
-```python   ”“python   ”“python”“python
-file_path = Path('data/ANON_0026.IMA')   # ← 修改这里即可
+    └── ... (226 images in total)
 ```
 
-## 运行环境配置（强烈推荐以下任一方式）
+- All `.IMA` files must be placed in the `data` folder  
+- File names must follow the pattern `ANON_XXXX.IMA` (XXXX = 4-digit number)  
+- `.IMA` files are standard DICOM files (only the extension is different)
 
-### 方式一：使用 conda（最稳定，推荐）
-```bash   ”“bash   ”“bash”“bash
-conda create -n dicom python=3.11 -yConda create -n dicom python=3.11Conda create -n dicom python=3.11
-conda activate dicom   Conda激活dicom   Conda激活dicom
+**Default displayed image**: `data/ANON_0001.IMA`  
+To view a different slice, edit line 5 in `visualization.py`:
+```python
+file_path = Path('data/ANON_0123.IMA')   # change the number here
+```
+
+## Environment Setup
+
+### Recommended: conda
+```bash
+conda create -n dicom python=3.11 -y
+conda activate dicom
 conda install -c conda-forge pydicom matplotlib -y
 ```
 
-### 方式二：使用 pip（确保安装正版 pydicom）
-```bash   ”“bash   ”“bash”“bash
+### Alternative: pip (ensures genuine pydicom)
+```bash
 pip uninstall pydicom pydicom-seg -y
-pip install --index-url https://pypi.python.org/simple pydicom matplotlibPIP安装——index-url https://pypi.python.org/simple pydicom matplotlib
+pip install --index-url https://pypi.python.org/simple pydicom matplotlib
 ```
 
-## 使用方法
-```bash   ”“bash   ”“bash”“bash
+## How to Run
+```bash
 python visualization.py
 ```
-运行后会弹出窗口显示灰度图像。
+A window will open displaying the selected grayscale image.
 
-## 常见问题解决
-- `AttributeError: module 'pydicom' has no attribute 'dcmread'` → 一定是装了假包，按上面 conda 或 pip 方式重新安装。
-- 图像全黑/全白 → 快速预览未做窗宽窗位处理，属于正常现象。如需精确显示，请使用 RadiAnt、Weasis、Horos、3D Slicer 等专业查看器。
+## Common Issues
+- `AttributeError: module 'pydicom' has no attribute 'dcmread'` → fake pydicom package installed; reinstall using the commands above.  
+- Image appears all black or all white → window/level is not applied in this simple viewer (normal behavior). For proper clinical display, use RadiAnt, Weasis, Horos, or 3D Slicer.
 
-2025-11-19　仅供学习与科研使用
+2025-11-19 For research and educational use only
 ```
