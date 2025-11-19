@@ -2,7 +2,6 @@ import pydicom
 from pathlib import Path
 import matplotlib.pyplot as plt
 
-
 file_path = Path('data/ANON_0001.IMA')             
 
 ds = pydicom.dcmread(file_path)                 
